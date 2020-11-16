@@ -61,6 +61,11 @@ public class HttpOutboundHandler {
     
     private void fetchGet(final FullHttpRequest inbound, final ChannelHandlerContext ctx, final String url) {
         final HttpGet httpGet = new HttpGet(url);
+        for(String key: (inbound.headers().names())){
+            String value = inbound.headers().get(key);
+            httpGet.setHeader(key,value);
+            System.out.println(key+":"+value);
+        }
         //httpGet.setHeader(HTTP.CONN_DIRECTIVE, HTTP.CONN_CLOSE);
         httpGet.setHeader(HTTP.CONN_DIRECTIVE, HTTP.CONN_KEEP_ALIVE);
         httpclient.execute(httpGet, new FutureCallback<HttpResponse>() {
