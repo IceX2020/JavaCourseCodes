@@ -27,7 +27,9 @@ public class RpcfxServerApplication {
 
 	@PostMapping("/")
 	public RpcfxResponse invoke(@RequestBody RpcfxRequest request) {
+		System.out.println("heelp");
 		return invoker.invoke(request);
+//		return "hello world";
 	}
 
 	@Bean
